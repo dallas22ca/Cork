@@ -1,0 +1,119 @@
+.modal_wrapper {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow-y: auto;
+	
+	.modal_sheet {	
+		background: #fdf7ec;
+		box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+		padding: 35px 20px 20px;
+		-ms-transform: rotate(1deg);
+		-webkit-transform: rotate(1deg);
+		transform: rotate(1deg);
+		width: 400px;
+		margin: 150px auto 125px;
+	
+		h2 {
+			font-family: Georgia;
+			position: absolute;
+			font-weight: bold;
+			font-size: 28px;
+			line-height: 38px;
+			color: #271A0E;
+			background: #fff;
+			box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+			-ms-transform: rotate(-1deg);
+			-webkit-transform: rotate(-1deg);
+			transform: rotate(-1deg);
+			display: inline-block;
+			padding: 6px 30px;
+			margin-top: -70px;
+		}
+	
+		p {
+			font-size: 14px;
+			line-height: 21px;
+			color: #412B18;
+		}
+	
+		.disclaimer {
+			margin-top: 7px;
+			color: #77604A;
+			font-size: 12px;
+			line-height: 18px;
+		}
+	
+		.tab {
+			margin: 20px 0 0px;
+			
+			&.facebook_tab {
+				margin: 40px 0;
+			}
+		
+			&.email_tab {
+				margin-bottom: 40px;
+				display: none;
+			}
+		}
+		
+		.field {
+			margin-bottom: 10px;
+		}
+		
+		input[type="text"], input[type="email"], input[type="password"] {
+			border: 0;
+			border-bottom: 1px solid #E8D4C9;
+			background: #fdf7ec;
+			width: 100%;
+			font-family: Helvetica, Arial, Sans Serif;
+			font-size: 18px;
+			line-height: 28px;
+			color: #412B18;
+			outline: none;
+			font-weight: bold;
+			
+			&::-webkit-input-placeholder {
+				color: #B59E88;
+			}
+			
+			&:-moz-placeholder {
+				color: #B59E88;
+			}
+			
+			&::-moz-placeholder {
+				color: #B59E88;
+			}
+			
+			&:-ms-input-placeholder {
+				color: #B59E88;
+			}
+		}
+		
+		label {
+			color: #77604A;
+			text-transform: uppercase;
+			font-size: 12px;
+			line-height: 21px;
+			font-weight: bold;
+		}
+	
+		.secured_by {
+			text-align: center;
+			font-size: 12px;
+			line-height: 21px;
+			background: #E8D4C9;
+			margin-left: -20px;
+			margin-right: -20px;
+			margin-bottom: -20px;
+		
+			a {
+				display: block;
+				padding: 4px;
+				font-weight: bold;
+			}
+		}
+	}
+}

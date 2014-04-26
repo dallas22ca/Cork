@@ -1,0 +1,44 @@
+<div class="modal_wrapper">
+	<div class="modal_sheet">
+
+		<h2><%= %w[new create].include?(action_name) ? "Create A" : "Edit" %> Folder</h2>
+		<p>A folder is a place to keep everything related to a specific sale or purchase.</p>
+
+		<div class="tab">
+			
+			<%= form_for(@folder) do |f| %>
+			  <% if @folder.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+			      <ul>
+			      <% @folder.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+
+			  <div class="field">
+			    <%= f.label :name %><br>
+			    <%= f.text_field :name, placeholder: "eg. Bob & Mary or 3135 Westfield Dr", autofocus: @folder.new_record? %>
+			  </div>
+				
+				<% unless @folder.new_record? %>
+				  <div class="field">
+				    <%= f.label :archive %><br>
+				    <%= f.check_box :archive %>
+				  </div>
+				<% end %>
+	
+			  <div class="float_right">
+			    <%= f.submit "Save Folder", class: "large blue button" %>
+			  </div>
+	
+				<div class="clear"></div>
+			<% end %>
+			
+		</div>
+	
+	</div>
+</div>

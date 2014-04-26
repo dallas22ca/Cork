@@ -1,0 +1,49 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div><%= f.label :email %><br />
+  <%= f.email_field :email, autofocus: true %></div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+	
+  <div><%= f.label :avatar %><br>
+    <%= f.file_field :avatar %></div>
+	
+  <div><%= f.label :website %><br>
+    <%= f.text_field :website %></div>
+	
+  <div><%= f.label :name %><br>
+    <%= f.text_field :name %></div>
+	
+  <div><%= f.label :phone %><br>
+    <%= f.text_field :phone %></div>
+		
+	<div class="field">
+		<%= f.label :brokerage_id %><br>
+		<%= f.collection_select :brokerage_id, Brokerage.all, :name, :id, include_blank: "Create a new brokerage" %>
+	</div>
+	
+	<% a = resource.brokerage ? resource.brokerage : Brokerage.new %>
+	<%= f.fields_for :brokerage, a do |b| %>
+		<hr />
+		<div class="field">
+			<%= b.label :name %><br>
+			<%= b.text_field :name %>
+		</div>
+		<div class="field">
+			<%= b.label :website %><br>
+			<%= b.text_field :website %>
+		</div>
+		<div class="field">
+			<%= b.label :logo %><br>
+			<%= b.file_field :logo %>
+		</div>
+		<hr />
+	<% end %>
+
+  <div><%= f.submit "Update" %></div>
+<% end %>

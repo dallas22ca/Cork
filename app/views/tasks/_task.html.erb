@@ -1,0 +1,4 @@
+<%= content_tag_for :li, task do %>
+	<%= check_box_tag "#{task}_complete", id: nil %>
+	<p class="content"><%= task.content %></p>
+<% end %>

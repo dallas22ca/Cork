@@ -1,0 +1,6 @@
+<% if @task.errors.any? %>
+	alert("<%= @task.errors.full_messages.join(". ") %>.")
+<% else %>
+	$("<%= j render @task %>").insertBefore(".folder_<%= @folder.id %> .task_sheet ul .placer")
+	$("#new_task")[0].reset()
+<% end %>

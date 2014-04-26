@@ -1,0 +1,51 @@
+<div class="modal_wrapper">
+	<div class="modal_sheet">
+		<h2>SheetStack</h2>
+		<p>SheetStack handles real estate transactions with privacy, security, and simplicity.</p>
+	
+		<div class="tab facebook_tab selected">
+			<div class="align_center">
+				<%= link_to "Sign in with Facebook", omniauth_authorize_path("user", :facebook), class: "button large blue" %><br />
+		
+				<p class="disclaimer">
+					<%= link_to "I'd rather use my email address.", "#", class: "swap_tabs", data: { tab: "email" } %>
+				</p>
+			</div>
+		</div>
+
+		<div class="tab email_tab">
+			<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+			  <div class="field">
+					<%= f.label :email %><br />
+				  <%= f.email_field :email, autofocus: true %>
+				</div>
+
+			  <div class="field">
+					<%= f.label :password %><br />
+			    <%= f.password_field :password, autocomplete: "off" %>
+				</div>
+
+			  <% if devise_mapping.rememberable? -%>
+			    <div class="field" style="margin-top: 20px; margin-bottom: 0; ">
+						<%= f.check_box :remember_me %> <%= f.label :remember_me %>
+					</div>
+			  <% end -%>
+
+			  <div class="float_right">
+					<%= f.button "Sign in", class: "large blue button" %>
+				</div>
+			
+				<p class="disclaimer" style="margin-top: 20px; margin-bottom: -20px;  ">
+					<%= link_to "I'd rather sign in with Facebook.", "#", class: "swap_tabs", data: { tab: "facebook" } %>
+				</p>
+			<% end %>
+		</div>
+	
+		<div class="clear"></div>
+		
+		<p class="secured_by">
+			<%= link_to "Help! How do I sign up?", new_user_registration_path %>
+		</p>
+	
+	</div>
+</div>
