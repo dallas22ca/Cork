@@ -3,11 +3,12 @@ body {
 	font-family: Helvetica, Arial, Sans Serif;
 	font-size: 14px;
 	line-height: 19px;
+	color: #271A0E;
 	
 	h1 {
 		font-size: 32px;
 		font-weight: bold;
-		margin-bottom: 20px;
+		margin-bottom: 50px;
 		color: #fff;
 		text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
 		
@@ -22,13 +23,21 @@ body {
 	&.sidebar_open {
 		#main, .modal_wrapper {
 			margin-left: 270px;
-			//margin-right: -270px;
+			margin-right: -270px;
 		}
 		
 		#sidebar {
 			left: 0;
 		}
+		
+		#loading .spinner {
+			left: 270px;
+		}
 	}
+}
+
+[contenteditable] {
+	outline: none;
 }
 
 a {
@@ -47,11 +56,27 @@ img {
 }
 
 #main {
+	.folder_is_archived {
+		margin-bottom: 0px;
+	}
+	
 	#dashboard {
 		padding: 0px 30px;
 
-		.meta_wrapper {
+		.user_sheet, .document_sheet {
 			width: 35%;
+		}
+		
+		.document_sheet {
+			margin-top: 70px;
+		}
+		
+		.home_sheet {
+			margin-top: 70px;
+		}
+		
+		.task_sheet {
+			min-height: 250px;
 		}
 	}
 }
@@ -129,53 +154,90 @@ img {
 		}
 		
 		.avatar {
-			width: 120px;
 			float: left;
+			width: 120px;
 		}
 		
 		.brokerage_logo {
 			float: right;
-			max-width: 180px;
-			max-height: 125px;
+			
+			img {
+				max-width: 180px;
+				max-height: 125px;
+			}
 		}
 	}
 }
 
+h2 {
+	position: absolute;
+	font-weight: bold;
+	color: #271A0E;
+	background: #fff;
+	box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+	-ms-transform: rotate(1deg);
+	-webkit-transform: rotate(1deg);
+	transform: rotate(1deg);
+	display: inline-block;
+	font-size: 18px;
+	padding: 5px 20px;
+	line-height: 30px;
+	margin-top: -55px;
+}
+
+.sheet {
+	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+	background: #eee;
+	padding: 40px 20px 20px;
+}
+
 .task_sheet {
 	background: url(/imgs/note.jpg);
-	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-	padding: 20px;
 	-ms-transform: rotate(-2deg);
 	-webkit-transform: rotate(-2deg);
 	transform: rotate(-2deg);
 	width: 60%;
-	font-size: 17px;
-	line-height: 24px;
+	float: left;
 	
-	h2 {
-		font-weight: bold;
-		font-size: 18px;
+	.task {
 		margin-bottom: 10px;
+		
+		.content {
+			display: block;
+			background: transparent;
+			float: right;
+			width: 88%;
+			border: 0;
+			resize: none;
+			outline: none;
+			font-size: 16px;
+			line-height: 24px;
+			margin-top: -1px;
+		}
+	
+		.meta {
+			width: 10%;
+			float: left;
+			text-align: right;
+		}
 	}
 	
-	.content {
-		display: inline-block;
+	#task_content {
+		width: 100%;
+		padding: 6px 8px;
+		outline: none;
+		font-size: 16px;
+		line-height: 24px;
+		font-family: Helvetica, Arial, Sans Serif;
+		border: 1px solid #ccc;
+		border-radius: 4px;
 	}
 }
 
-#users {
-	background: #eee;
-	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-	padding: 20px;
+.user_sheet {
 	-ms-transform: rotate(-2deg);
 	-webkit-transform: rotate(-2deg);
 	transform: rotate(-2deg);
-	
-	h2 {
-		font-weight: bold;
-		font-size: 18px;
-		margin-bottom: 10px;
-	}
 	
 	.user {
 		display: inline-block;
@@ -191,19 +253,9 @@ img {
 }
 
 .document_sheet {
-	margin-top: 40px;
-	background: #eee;
-	box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-	padding: 20px;
 	-ms-transform: rotate(2deg);
 	-webkit-transform: rotate(2deg);
 	transform: rotate(2deg);
-	
-	h2 {
-		font-weight: bold;
-		font-size: 18px;
-		margin-bottom: 10px;
-	}
 	
 	th {
 		font-weight: bold;
@@ -216,24 +268,15 @@ img {
 	display: none;
 }
 
+#map {
+	-ms-transform: rotate(0.5deg);
+	-webkit-transform: rotate(0.5deg);
+	transform: rotate(0.5deg);
+	margin-bottom: 70px;
+	margin-top: 70px;
+}
+
 .home_sheet {
-	h2 {
-		font-weight: bold;
-		font-size: 18px;
-		margin-bottom: 10px;
-	}
-	
-	#map {
-		-ms-transform: rotate(0.5deg);
-		-webkit-transform: rotate(0.5deg);
-		transform: rotate(0.5deg);
-		background: #eee;
-		box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
-		padding: 20px;
-		margin-bottom: 20px;
-		margin-top: 40px;
-	}
-	
 	ul {
 		margin-left: -2%;
 		margin-right: -2%;
@@ -302,6 +345,12 @@ img {
 	margin: 50px auto;
 }
 
+.upload_document {
+	margin-top: -35px;
+	margin-right: -15px;
+	float: right;
+}
+
 .button {
 	font-family: Helvetica, Arial, Sans Serif;
 	color: #fff;
@@ -325,8 +374,143 @@ img {
 		box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.2);
 	}
 	
+	&.small {
+		font-size: 11px;
+		padding: 3px 15px;
+	}
+	
 	&.large {
 		font-size: 15px;
 		padding: 10px 30px;
+	}
+}
+
+.back {
+	margin-right: 10px;
+	color: #77604A;
+	font-size: 12px;
+}
+
+#loading {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 997;
+	background: url(/imgs/cork.jpg);
+	
+	.spinner {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 998;
+		background: url(/imgs/loading.gif) center no-repeat;
+	}
+}
+
+@media screen and (max-width: 720px){
+	body.sidebar_open {
+		#main, .modal_wrapper {
+			margin-right: -270px;
+		}
+		
+		#sidebar {
+			position: fixed;
+		}
+	}
+	
+	#main {
+		#dashboard {
+			margin-top: 40px;
+			padding: 0px;
+			
+			.task_sheet {
+				min-height: initial;
+			}
+		}
+	}
+	
+	h1 {
+		padding-left: 17px;
+	}
+	
+	#header {
+		padding: 12px;
+
+		.container {
+			.avatar {
+				display: inline-block;
+				float: right;
+				width: auto;
+				max-height: 80px;
+				max-width: 80px;
+			}
+			
+			.brokerage_logo {
+				display: none;
+			}
+			
+			.profile {
+				width: 55%;
+				float: left;
+				margin-left: 40px;
+				margin-top: 0;
+				
+				p {
+					font-size: 12px;
+					line-height: 17px;
+					
+					&.name {
+						font-size: 17px;
+						line-height: 27px;
+					}
+				}
+			}
+		}
+	}
+		
+	.sheet {
+		width: 100% !important;
+		padding-top: 35px;
+		margin-bottom: 70px;
+		float: none;
+		
+		&.task_sheet {
+			-ms-transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		
+		&.document_sheet {
+			-ms-transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		
+		&.user_sheet {
+			-ms-transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
+		}
+		
+		.home {
+			width: auto;
+			float: none;
+			-ms-transform: rotate(0deg) !important;
+			-webkit-transform: rotate(0deg) !important;
+			transform: rotate(0deg) !important;
+		}
+	}
+	
+	#sidebar {
+		position: absolute;
+
+		.toggle_sidebar {
+			margin-right: -37px;
+			margin-top: 30px;
+		}
 	}
 }

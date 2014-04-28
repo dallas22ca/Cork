@@ -1,49 +1,80 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="modal_wrapper">
+	<div class="modal_sheet">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+		<h2>My Account</h2>
+		<p>A folder is a place to keep everything related to a specific sale or purchase. For buyers, the client(s) name is a great thing to use. For sellers, we recommend the address.</p>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+		<div class="tab">
+			
+			<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+			  <%= devise_error_messages! %>
+	
+			  <div class="field">
+					<%= f.label :name %><br>
+			    <%= f.text_field :name %>
+				</div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+			  <div class="field">
+					<%= f.label :email %><br />
+				  <%= f.email_field :email %>
+				</div>
 	
-  <div><%= f.label :avatar %><br>
-    <%= f.file_field :avatar %></div>
+			  <div class="field">
+					<%= f.label :phone %><br>
+			    <%= f.text_field :phone %>
+				</div>
 	
-  <div><%= f.label :website %><br>
-    <%= f.text_field :website %></div>
+			  <div class="field">
+					<%= f.label :website %><br>
+			    <%= f.text_field :website %>
+				</div>
 	
-  <div><%= f.label :name %><br>
-    <%= f.text_field :name %></div>
+			  <div class="field">
+					<%= f.label :avatar %><br>
+			    <%= f.file_field :avatar %>
+				</div>
 	
-  <div><%= f.label :phone %><br>
-    <%= f.text_field :phone %></div>
-		
-	<div class="field">
-		<%= f.label :brokerage_id %><br>
-		<%= f.collection_select :brokerage_id, Brokerage.all, :name, :id, include_blank: "Create a new brokerage" %>
+				<div class="in_modal">
+					<h3>Brokerage Details</h3>
+
+					<% a = resource.brokerage ? resource.brokerage : Brokerage.new %>
+					<%= f.fields_for :brokerage, a do |b| %>
+						<div class="field">
+							<%= b.label :name %><br>
+							<%= b.text_field :name %>
+						</div>
+						<div class="field">
+							<%= b.label :website %><br>
+							<%= b.text_field :website %>
+						</div>
+						<div class="field">
+							<%= b.label :logo %><br>
+							<%= b.file_field :logo %>
+						</div>
+					<% end %>
+				</div>
+	
+				<div class="password_fields" style="<%= "display: block;" if params[:user] && params[:user][:password] %>">
+				  <div class="field">
+						<%= f.label :password %><br>
+				    <%= f.password_field :password %>
+					</div>
+
+				  <div class="field">
+						<%= f.label :password_confirmation %><br>
+				    <%= f.password_field :password_confirmation %>
+					</div>
+				</div>
+				
+				<p class="float_left" style="<%= "display: none;" if params[:user] && params[:user][:password] %>"><%= link_to "Change Password", "#", class: "show_password_fields" %></p>
+			  <div class="actions float_right">
+					<%= f.submit "Save My Account", class: "large blue button" %>
+				</div>
+			<% end %>
+			
+			<div class="clear"></div>
+			
+		</div>
+	
 	</div>
-	
-	<% a = resource.brokerage ? resource.brokerage : Brokerage.new %>
-	<%= f.fields_for :brokerage, a do |b| %>
-		<hr />
-		<div class="field">
-			<%= b.label :name %><br>
-			<%= b.text_field :name %>
-		</div>
-		<div class="field">
-			<%= b.label :website %><br>
-			<%= b.text_field :website %>
-		</div>
-		<div class="field">
-			<%= b.label :logo %><br>
-			<%= b.file_field :logo %>
-		</div>
-		<hr />
-	<% end %>
-
-  <div><%= f.submit "Update" %></div>
-<% end %>
+</div>

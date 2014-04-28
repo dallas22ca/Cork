@@ -59,10 +59,14 @@ class User < ActiveRecord::Base
   end
 
   def password_required?
-    if identities.blank?
+    if identities.empty?
       false
     else
-      super
+      if encrypted_password.blank?
+        super
+      else
+        false
+      end
     end
   end
 

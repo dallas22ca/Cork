@@ -5,33 +5,17 @@
 	right: 0;
 	bottom: 0;
 	overflow-y: auto;
+	overflow-x: hidden;
 	
-	.modal_sheet {	
+	.modal_sheet {
 		background: #fdf7ec;
 		box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
 		padding: 35px 20px 20px;
 		-ms-transform: rotate(1deg);
 		-webkit-transform: rotate(1deg);
 		transform: rotate(1deg);
-		width: 400px;
+		max-width: 400px;
 		margin: 150px auto 125px;
-	
-		h2 {
-			font-family: Georgia;
-			position: absolute;
-			font-weight: bold;
-			font-size: 28px;
-			line-height: 38px;
-			color: #271A0E;
-			background: #fff;
-			box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
-			-ms-transform: rotate(-1deg);
-			-webkit-transform: rotate(-1deg);
-			transform: rotate(-1deg);
-			display: inline-block;
-			padding: 6px 30px;
-			margin-top: -70px;
-		}
 	
 		p {
 			font-size: 14px;
@@ -56,6 +40,10 @@
 			&.email_tab {
 				margin-bottom: 40px;
 				display: none;
+			}
+			
+			&.password_tab {
+				margin-bottom: 40px;
 			}
 		}
 		
@@ -99,6 +87,61 @@
 			line-height: 21px;
 			font-weight: bold;
 		}
+		
+		.in_modal {
+			margin: 60px 0 40px;
+			background: #77604A;
+			color: #fdf7ec;
+			padding: 25px;
+			-ms-transform: rotate(-1deg);
+			-webkit-transform: rotate(-1deg);
+			transform: rotate(-1deg);
+			
+			label {
+				color: #E9D9D4;
+				font-weight: normal;
+			}
+			
+			h3 {
+				font-family: Georgia;
+				position: absolute;
+				font-weight: bold;
+				font-size: 18px;
+				line-height: 28px;
+				color: #271A0E;
+				background: #fff;
+				box-shadow: 0 0 7px rgba(0, 0, 0, 0.5);
+				-ms-transform: rotate(1deg);
+				-webkit-transform: rotate(1deg);
+				transform: rotate(1deg);
+				display: inline-block;
+				padding: 4px 20px;
+				margin-top: -50px;
+				margin-left: -10px;
+			}
+			
+			input[type="text"], input[type="email"], input[type="password"] {
+				color: #fdf7ec;
+				border-color: #E9D9D4;
+				background: #77604A;
+			
+				&::-webkit-input-placeholder {
+					color: #fdf7ec;
+				}
+			
+				&:-moz-placeholder {
+					color: #fdf7ec;
+				}
+			
+				&::-moz-placeholder {
+					color: #fdf7ec;
+				}
+			
+				&:-ms-input-placeholder {
+					color: #fdf7ec;
+				}
+			}
+		}
 	
 		.secured_by {
 			text-align: center;
@@ -114,6 +157,34 @@
 				padding: 4px;
 				font-weight: bold;
 			}
+		}
+	}
+}
+	
+.password_fields {
+	display: none;
+	margin-bottom: 40px;
+}
+
+.errors {
+	background: #D4BCC6;
+	color: maroon;
+	padding: 20px;
+	margin-bottom: 20px;
+	list-style: disc;
+	
+	li {
+		margin-left: 20px;
+	}
+}
+
+@media screen and (max-width: 720px){
+	.modal_wrapper {
+		.modal_sheet {
+			margin: 100px auto 725px;
+			-ms-transform: rotate(0deg);
+			-webkit-transform: rotate(0deg);
+			transform: rotate(0deg);
 		}
 	}
 }

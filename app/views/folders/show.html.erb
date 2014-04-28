@@ -1,89 +1,39 @@
 <div class="folder_<%= @folder.id %>">
-
-	<div id="header">
-		<div class="container">
-			<% if @folder.creator.brokerage && @folder.creator.brokerage.logo.exists? %>
-				<a class="brokerage_logo"><%= image_tag @folder.creator.brokerage.logo.url %></a>
-			<% elsif @folder.creator == current_user %>
-		    <%= link_to image_tag("/imgs/brokerage_no_logo.jpg"), edit_user_registration_path, class: "brokerage_logo" %>
-			<% end %>
-			
-			<a class="avatar"><%= image_tag @folder.creator.avatar.url %></a>
-			
-	    <div class="profile">
-	    	<p class="name"><%= mail_to @folder.creator.email, @folder.creator.name %></p>
-				
-				<% if @folder.creator.brokerage %>
-					<p class="brokerage_name"><%= @folder.creator.brokerage.name %></p>
-				<% end %>
-	    	
-				<% if @folder.creator.phone.blank? %>
-					<p class="phone"><%= link_to "Click here to add contact information!", edit_user_registration_path %></p>
-				<% else %>
-					<p class="phone"><%= @folder.creator.phone %></p>
-				<% end %>
-				
-				<% unless @folder.creator.website.blank? %>
-		    	<p class="website"><%= link_to @folder.creator.website, @folder.creator.website, target: :blank %></p>
-				<% end %>
-				
-	    </div>
-	    <div class="clear"></div>
+	
+	<% if @folder.archive? %>
+		<div class="folder_is_archived errors">
+			This folder is archived. No changes can be made.
 		</div>
-	</div>
+	<% end %>
 
+	<%= render "folders/header" %>
 
 	<div id="dashboard" class="container">
 		<h1><%= @folder.name %><%= link_to "Edit Folder", edit_folder_path(@folder), class: "edit" if @folder.creator == current_user %></h1>
 
-		<div class="meta_wrapper float_right">
-			<div id="users">
-				<h2>Who's Here?</h2>
-				<ul>
-					<% @folder.users.each do |user| %>
-	  				<li class="user">
-							<a href="#!/add/user">
-								<%= image_tag user.avatar.url %>
-							</a>
-						</li>
-					<% end %>
-					<li class="placer"></li>
-					<li class="user">
+		<div class="user_sheet sheet float_right">
+			<h2>Who's Here?</h2>
+			<ul>
+				<% @folder.users.each do |user| %>
+  				<li class="user">
 						<a href="#!/add/user">
-							<img src="/imgs/plus.png">
+							<%= image_tag user.avatar.url %>
 						</a>
 					</li>
-				</ul>
-			</div>
-
-			<div class="document_sheet">
-				<h2>Documents</h2>
-				<%= link_to "Upload File", "#", class: "upload_document" %>
-				<table>
-					<thead>
-						<tr>
-							<th>File Name</th>
-						</tr>
-					</thead>
-					<tbody>
-						<%= render @folder.documents %>
-						<tr class="placer">
-							<td>
-								<%= form_for [@folder, Document.new], id: "new_document" do |f| %>
-									<%= f.file_field :file %>
-									<%= f.submit %>
-								<% end %>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+				<% end %>
+				<li class="placer"></li>
+				<li class="user">
+					<a href="#!/add/user">
+						<img src="/imgs/plus.png">
+					</a>
+				</li>
+			</ul>
 		</div>
-
-		<div class="task_sheet">
-			<h2>What Needs to be Done</h2>
+		
+		<div class="task_sheet sheet float_left">
+			<h2>What Needs to be Done?</h2>
 			<ul>
-				<%= render @folder.tasks %>
+				<%= render @folder.tasks.order(:created_at) %>
 				<li class="placer"></li>
 				<li>
 					<%= form_for [@folder, Task.new], remote: true do |f| %>
@@ -93,13 +43,34 @@
 			</ul>
 		</div>
 
-		<div class="clear"></div>
+		<div class="document_sheet sheet float_right">
+			<h2>Documents</h2>
+			<%= link_to "Add", "#", class: "upload_document small blue button" %>
+			<table>
+				<thead>
+					<tr>
+						<th>File Name</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%= render @folder.documents %>
+					<tr class="placer">
+						<td>
+							<%= form_for [@folder, Document.new], id: "new_document" do |f| %>
+								<%= f.file_field :file %>
+								<%= f.submit %>
+							<% end %>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 
-		<div class="home_sheet">
-			<div id="map">
-				<h2>Homes We're Looking At</h2>
-				<img src="/imgs/map.png">
-			</div>
+		<div class="clear"></div>
+		
+		<div class="home_sheet sheet">
+			<h2>Homes We're Looking At...</h2>
+			
 			<ul>
 				<li class="home">
 					<a href="#">
@@ -110,9 +81,14 @@
 					</a>
 				</li>
 			</ul>
+			
+			<div class="clear"></div>
 		</div>
 
-		<div class="clear"></div>
+		<div id="map" class="home_sheet sheet">
+			<h2>Where are the Homes?</h2>
+			<img src="/imgs/map.png">
+		</div>
 
 	</div>
 	

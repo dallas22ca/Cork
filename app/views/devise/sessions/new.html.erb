@@ -17,7 +17,7 @@
 			<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 			  <div class="field">
 					<%= f.label :email %><br />
-				  <%= f.email_field :email, autofocus: true %>
+				  <%= f.email_field :email %>
 				</div>
 
 			  <div class="field">
@@ -36,6 +36,7 @@
 				</div>
 			
 				<p class="disclaimer" style="margin-top: 20px; margin-bottom: -20px;  ">
+					<%= link_to "I forgot my password.", new_user_password_path %><br>
 					<%= link_to "I'd rather sign in with Facebook.", "#", class: "swap_tabs", data: { tab: "facebook" } %>
 				</p>
 			<% end %>
@@ -44,7 +45,7 @@
 		<div class="clear"></div>
 		
 		<p class="secured_by">
-			<%= link_to "Help! How do I sign up?", new_user_registration_path %>
+			<%= link_to "How do I sign up?", new_user_registration_path %>
 		</p>
 	
 	</div>

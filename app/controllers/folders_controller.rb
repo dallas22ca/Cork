@@ -1,15 +1,20 @@
 class FoldersController < ApplicationController
-  before_action :set_folder, only: [:show, :edit, :update, :destroy]
+  before_action :set_creator_folder, only: [:edit, :update, :destroy]
 
   # GET /folders
   # GET /folders.json
   def index
-    redirect_to @all_folders.last if @all_folders.any?
+    if @folders.any?
+      redirect_to @folders.last
+    else
+      redirect_to new_folder_path
+    end
   end
 
   # GET /folders/1
   # GET /folders/1.json
   def show
+    @folder = current_user.folders.find(params[:id])
   end
 
   # GET /folders/new
@@ -65,10 +70,10 @@ class FoldersController < ApplicationController
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def folder_params
-      params.require(:folder).permit(:name, :archive) if @folder.creator == current_user
+      params.require(:folder).permit(:name, :archive) if action_name == "create" || @folder.creator == current_user
     end
     
-    def set_folder
-      @folder = current_user.folders.find(params[:id])
+    def set_creator_folder
+      @folder = current_user.folders.where(creator_id: current_user.id).find(params[:id])
     end
 end

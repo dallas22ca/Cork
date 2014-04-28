@@ -1,4 +1,8 @@
-<%= content_tag_for :li, task do %>
-	<%= check_box_tag "#{task}_complete", id: nil %>
-	<p class="content"><%= task.content %></p>
+<%= content_tag_for :li, task, data: { url: folder_task_path(task.folder, task), content: task.content } do %>
+	<div class="meta">
+		<%= link_to "x", folder_task_path(task.folder, task), class: "delete", method: :delete, remote: true, data: { confirm: "Are you sure you want to delete this task?" } %>
+		<%= check_box_tag "#{task}_complete", id: nil %>
+	</div>
+	<p class="content" contenteditable><%= task.content %></p>
+	<div class="clear"></div>
 <% end %>

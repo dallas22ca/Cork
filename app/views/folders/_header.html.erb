@@ -1,0 +1,31 @@
+<div id="header">
+	<div class="container">
+		<% if @folder.creator.brokerage && @folder.creator.brokerage.logo.exists? %>
+			<%= link_to image_tag(@folder.creator.brokerage.logo.url), @folder.creator.brokerage.website.blank? ? "#" : @folder.creator.brokerage.website, class: "brokerage_logo", target: :blank %>
+		<% elsif @folder.creator == current_user %>
+	    <%= link_to image_tag("/imgs/brokerage_no_logo.jpg"), edit_user_registration_path, class: "brokerage_logo" %>
+		<% end %>
+		
+		<%= image_tag @folder.creator.avatar.url, class: "avatar" %>
+		
+    <div class="profile">
+    	<p class="name"><%= mail_to @folder.creator.email, @folder.creator.name %></p>
+			
+			<% if @folder.creator.brokerage %>
+				<p class="brokerage_name"><%= @folder.creator.brokerage.name %></p>
+			<% end %>
+    	
+			<% if @folder.creator.phone.blank? %>
+				<p class="phone"><%= link_to "Click here to add contact information!", edit_user_registration_path %></p>
+			<% else %>
+				<p class="phone"><%= link_to @folder.creator.phone, "tel:#{@folder.creator.phone}" %></p>
+			<% end %>
+			
+			<% unless @folder.creator.website.blank? %>
+	    	<p class="website"><%= link_to @folder.creator.website, @folder.creator.website, target: :blank %></p>
+			<% end %>
+			
+    </div>
+    <div class="clear"></div>
+	</div>
+</div>
